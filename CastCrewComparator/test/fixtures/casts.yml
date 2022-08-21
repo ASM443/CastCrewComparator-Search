@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_person: MyString
+  second_person: MyString
+
+two:
+  first_person: MyString
+  second_person: MyString

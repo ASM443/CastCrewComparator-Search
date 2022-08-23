@@ -73,7 +73,10 @@ class CastsController < ApplicationController
     end
 
     def api_call
-      puts "@@@@@Test1"
+      puts ""
+      puts "@@@@@Test1@@@@@"
+      puts ""
+
       imdb_api_key = "";
       # 1.1 Search
       uri = URI("https://imdb-api.com/en/API/Search/#{imdb_api_key}/#{:first_person}")
@@ -104,8 +107,27 @@ class CastsController < ApplicationController
       # 4
       intersection = all_cc2 & all_cc1
 
-      puts intersection
+      listOfMembers = Array.new{CCInfo}
+
+      for x in 1..5 do
+        listOfMembers.push(getCCInfo(intersection[x].first))
+      end
+        
+       puts listOfMembers
+
     end
+end
+
+
+def getCCInfo(nm)
+  imdb_api_key = "";
+  uri = URI("https://imdb-api.com/API/Name/#{imdb_api_key}/#{nm}");
+  ccInforesult= Net::HTTP.get_response(uri)
+
+  ccData = CcInfo.new(name: JSON.parse(ccInforesult.body)["name"].to_s,picture:JSON.parse(ccInforesult.body)["image"].to_s,knownFor: JSON.parse(ccInforesult.body)["knownFor"].to_s)
+  ccData.save
+
+  ccData
 end
 
 
@@ -114,4 +136,5 @@ end
 2. Get id from first responses
 3. Get all id of CC
 4. Find people in common
+5. New Function that takes name and returns photo and known works
 =end

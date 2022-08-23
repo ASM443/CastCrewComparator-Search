@@ -12,3 +12,7 @@ Added tailwindcss to the project and added route to the homepage.
 8/21/22
 
 Added Cast Model. Can now add two films and the contoller will output all cast members in common, to the console. There is an issue where the film searched is not the desired film, either a film or show with the same name or partly the same. Need to implement proper search feature. The process of calling the imdb api and ruby code is slow, around 5 seconds, need to find the bottleneck. 
+
+8/22/22
+
+Added a new database for cast members. Queried the imdb API to get known works and image of cast members. Found there is 100 limit to API calls. 

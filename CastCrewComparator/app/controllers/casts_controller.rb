@@ -28,7 +28,7 @@ class CastsController < ApplicationController
 
     respond_to do |format|
       if @cast.save
-        format.html { redirect_to cast_url(@cast), notice: "Cast was successfully created." }
+        format.html { redirect_to cast_url(@cast), notice: "Cast members in common #{CcInfo.last.name}" }
         format.json { render :show, status: :created, location: @cast }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -68,8 +68,17 @@ class CastsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def cast_params
-      api_call()
+      #api_call()
+      test_api_call();
       params.require(:cast).permit(:first_person, :second_person)
+    end
+
+
+    def test_api_call
+      ccData = CcInfo.new(name: "Tom Sturridge", picture: "https://m.media-amazon.com/images/M/MV5BMjMyNjYwNjE3Ml5BMl5BanBnXkFtZTcwMTI0NTQwOA@@._V1_UY317_CR14,0,214,317_AL_.jpg", knownFor: "")
+      ccData.save
+
+      ccData
     end
 
     def api_call
@@ -109,7 +118,7 @@ class CastsController < ApplicationController
 
       listOfMembers = Array.new{CCInfo}
 
-      for x in 1..5 do
+      for x in 1..2 do
         listOfMembers.push(getCCInfo(intersection[x].first))
       end
         
